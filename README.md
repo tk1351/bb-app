@@ -14,3 +14,11 @@ npm run start-node
 ```  
   
 localhost:3001でHello Worldが表示
+
+# React起動  
+appディレクトリへ移動し下記コマンド実行
+```  
+npm start  
+```  
+  
+localhost:3000でHello Worldが表示
