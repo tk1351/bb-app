@@ -11,7 +11,8 @@ app.use(bodyParser.json())
 
 mongoose.connect(config.DB_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 })
 
 const db = mongoose.connection;
