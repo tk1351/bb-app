@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Redirect
 } from "react-router-dom";
 import Login from '../auth/Login';
 import Register from '../auth/Register';
@@ -12,6 +12,7 @@ import Home from './Home';
 const Routes = () => {
   return(
       <div>
+        <Redirect to="/home" />
         <Switch>
           <Route path="/home">
             <Home />

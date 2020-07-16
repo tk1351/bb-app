@@ -6,7 +6,6 @@ import {
   Link
 } from "react-router-dom";
 import Routes from './Routes';
-import { userInfo } from 'os';
 
 const Navbar = () => {
   return(
@@ -14,8 +13,8 @@ const Navbar = () => {
       <div>
         
         <Link to="/home">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+        <Link to="/login">ログイン</Link>
+        <Link to="/register">新規登録</Link>
 
         <Routes />
       </div>
