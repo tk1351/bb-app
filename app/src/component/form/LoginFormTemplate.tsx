@@ -44,6 +44,7 @@ const LoginForm = () => {
           <Form.Control
             type='text'
             placeholder=''
+            name='username'
             onChange={formik.handleChange}
             value={formik.values.username}
           />
@@ -55,6 +56,7 @@ const LoginForm = () => {
           <Form.Control
             type='password'
             placeholder=''
+            name='password'
             onChange={formik.handleChange}
             value={formik.values.password}
           />
