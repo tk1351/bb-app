@@ -1,13 +1,12 @@
-import React from 'react'
-import RegisterForm from '../form/RegisterFormTemplate'
+import React from 'react';
+import RegisterForm from '../form/RegisterFormTemplate';
 
 const Register = () => {
-  return(
+  return (
     <div>
-      <p>Register</p>
       <RegisterForm></RegisterForm>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
