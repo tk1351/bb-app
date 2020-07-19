@@ -88,7 +88,7 @@ const RegisterForm = () => {
           <Form.Control
             type='password'
             placeholder=''
-            name='confirmPassword'
+            name='password'
             onChange={formik.handleChange}
             value={formik.values.password}
           />
