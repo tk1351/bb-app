@@ -1,5 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik';
+import { postNewRegister } from '../../module/auth/register'
 
 const RegisterForm = () => {
   const formik = useFormik( {
@@ -10,9 +11,8 @@ const RegisterForm = () => {
       confirmPassword: ''
     },
     onSubmit: values => {
-      console.log(values)
-    }
-  })
+      postNewRegister(values)
+  }})
 
   return (
     <form onSubmit={formik.handleSubmit}>
