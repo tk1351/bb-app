@@ -3,7 +3,7 @@ import LoginForm from '../form/LoginFormTemplate';
 
 const Login = () => (
   <>
-    <p>Login</p>
+    <p>ログイン</p>
     <LoginForm />
   </>
 );

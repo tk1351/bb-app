@@ -12,7 +12,8 @@ import Home from './Home';
 const Routes = () => {
   return(
       <div>
-        <Redirect to="/home" />
+        {/* Homeへのリダイレクト */}
+        {/* <Redirect to="/home" /> */}
         <Switch>
           <Route path="/home">
             <Home />

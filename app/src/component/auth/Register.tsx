@@ -6,7 +6,7 @@ const Register = () => {
 
   return(
     <div>
-      <p>Register</p>
+      <p>新規登録</p>
       <RegisterForm></RegisterForm>
       {/* <button onClick={() => getMongoDB()}>情報持ってくる</button> */}
     </div>

@@ -15,47 +15,57 @@ const RegisterForm = () => {
   }})
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div>
-        <label htmlFor="username">ユーザー名</label>
-        <input
-          name="username"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.username}
-        />
-      </div>
-      <div>
-        <label htmlFor="email">メールアドレス</label>
-        <input
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">パスワード</label>
-        <input
-          name="password"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-        />
-      </div>
-      <div>
-        <label htmlFor="confirmPassword">パスワード（確認用）</label>
-        <input
-          name="confirmPassword"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.confirmPassword}
-        />
-      </div>
-      <div>
-        <button type="submit">登録</button>
-      </div>
-    </form>
+    <div className="container">
+      <form onSubmit={formik.handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username" className="col-sm col-form-label text-md-left">ユーザー名</label>
+          <input
+            className="form-control"
+            name="username"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.username}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email" className="col-sm col-form-label text-md-left">メールアドレス</label>
+          <input
+            className="form-control"
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password" className="col-sm col-form-label text-md-left">パスワード</label>
+          <input
+            className="form-control"
+            name="password"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="confirmPassword" className="col-sm col-form-label text-md-left">パスワード（確認用）</label>
+          <input
+            className="form-control"
+            name="confirmPassword"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.confirmPassword}
+            required
+          />
+        </div>
+        <div>
+          <button type="submit" className="btn btn-primary">登録</button>
+        </div>
+      </form>
+    </div>
   )
 }
 
