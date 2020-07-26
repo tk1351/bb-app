@@ -20,7 +20,7 @@ localhost:3001でHello Worldが表示
 appディレクトリへ移動し下記コマンド実行
 ```  
 npm install  
-npm start  
+npm start  or  yarn start  
 ```  
   
 localhost:3000でHello Worldが表示
