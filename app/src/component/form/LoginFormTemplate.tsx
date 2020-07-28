@@ -1,5 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik';
+import { login } from '../../module/auth/login';
 
 const LoginForm = () => {
   const formik = useFormik( {
@@ -8,7 +9,7 @@ const LoginForm = () => {
       password: ''
     },
     onSubmit: values => {
-      console.log(values)
+      login(values)
     }
   })
 
@@ -38,7 +39,7 @@ const LoginForm = () => {
           />
         </div>
         <div>
-          <button type="submit" className="btn btn-primary">登録</button>
+          <button type="submit" className="btn btn-primary">ログイン</button>
         </div>
       </form>
     </div>

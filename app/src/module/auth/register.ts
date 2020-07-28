@@ -1,28 +1,19 @@
 import axios from 'axios'
+import history from '../../history'
 
-interface PostValues {
+interface PostRegisterValues {
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 
-// export const getMongoDB = async () => {
-//   const url = '/api/v1/users'
-//   try {
-//     const response = await axios.get(url)
-//     return { isSuccess: true, data: response.data, error: null }
-//   } catch (error) {
-//     return { isSuccess: false, data: null, error }
-//   }
-// }
-
-export const postNewRegister = async (values: PostValues) => {
+export const postNewRegister = async (values: PostRegisterValues) => {
   const url = '/api/v1/users/register'
   try {
-    const response = await axios.post(url, values)
-    return { isSuccess: true, data: response.data, error: null }
+    await axios.post(url, values)
+    history.push('/login')
   } catch (error) {
-    return { isSuccess: false, data: null, error }
+    console.error(error)
   }
 }

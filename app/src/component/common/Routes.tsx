@@ -8,6 +8,7 @@ import {
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Home from './Home';
+import Profile from '../auth/Profile'
 
 const Routes = () => {
   return(
@@ -23,6 +24,9 @@ const Routes = () => {
           </Route>
           <Route path="/register">
             <Register />
+          </Route>
+          <Route path="/profile">
+            <Profile></Profile>
           </Route>
         </Switch>
       </div>

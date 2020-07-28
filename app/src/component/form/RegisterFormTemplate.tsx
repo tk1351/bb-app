@@ -34,6 +34,7 @@ const RegisterForm = () => {
             className="form-control"
             name="email"
             type="email"
+            pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
             onChange={formik.handleChange}
             value={formik.values.email}
             required
