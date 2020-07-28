@@ -9,6 +9,7 @@ import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Home from './Home';
 import Profile from '../auth/Profile'
+import SubmitBestBuy from '../form/SubmitBestBuy';
 
 const Routes = () => {
   return(
@@ -26,7 +27,10 @@ const Routes = () => {
             <Register />
           </Route>
           <Route path="/profile">
-            <Profile></Profile>
+            <Profile />
+          </Route>
+          <Route path="/submit">
+            <SubmitBestBuy />
           </Route>
         </Switch>
       </div>
