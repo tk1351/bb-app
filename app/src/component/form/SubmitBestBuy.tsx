@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '@material-ui/core/Button';
 
 const SubmitBestBuy = () => {
   return(
@@ -9,7 +10,7 @@ const SubmitBestBuy = () => {
           <textarea></textarea>
         </div>
         <div>
-          <button type="submit" className="btn btn-primary">投稿</button>
+          <Button type="submit" variant="contained" color="primary">投稿</Button>
         </div>
       </form>
 

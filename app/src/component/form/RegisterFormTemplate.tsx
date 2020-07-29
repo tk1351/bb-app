@@ -1,6 +1,20 @@
 import React from 'react'
 import { useFormik } from 'formik';
 import { postNewRegister } from '../../module/auth/register'
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import { Link } from "react-router-dom";
+
+const useStyles = makeStyles((theme) => ({
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  }
+}));
 
 const RegisterForm = () => {
   const formik = useFormik( {
@@ -14,59 +28,74 @@ const RegisterForm = () => {
       postNewRegister(values)
   }})
 
+  const classes = useStyles();
+
   return (
-    <div className="container">
-      <form onSubmit={formik.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username" className="col-sm col-form-label text-md-left">ユーザー名</label>
-          <input
-            className="form-control"
-            name="username"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.username}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email" className="col-sm col-form-label text-md-left">メールアドレス</label>
-          <input
-            className="form-control"
-            name="email"
-            type="email"
-            pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password" className="col-sm col-form-label text-md-left">パスワード</label>
-          <input
-            className="form-control"
-            name="password"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirmPassword" className="col-sm col-form-label text-md-left">パスワード（確認用）</label>
-          <input
-            className="form-control"
-            name="confirmPassword"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.confirmPassword}
-            required
-          />
-        </div>
-        <div>
-          <button type="submit" className="btn btn-primary">登録</button>
-        </div>
+    <Container component="main" maxWidth="xs">
+      <Typography component="h1" variant="h6">新規登録</Typography>
+      <form className={classes.form} noValidate autoComplete="off"  onSubmit={formik.handleSubmit}>
+        <TextField
+          id="outlined-basic"
+          label="ユーザー名"
+          variant="outlined"
+          name="username"
+          type="text"
+          onChange={formik.handleChange}
+          value={formik.values.username}
+          required
+          fullWidth
+        />
+        <TextField
+          id="outlined-basic"
+          label="メールアドレス"
+          variant="outlined"
+          name="email"
+          type="email"
+          // pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          required
+          fullWidth
+        />
+        <TextField
+          id="outlined-basic"
+          label="パスワード"
+          variant="outlined"
+          name="password"
+          type="password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          required
+          fullWidth
+        />
+        <TextField
+          id="outlined-basic"
+          label="パスワード（確認用）"
+          variant="outlined"
+          name="confirmPassword"
+          type="password"
+          onChange={formik.handleChange}
+          value={formik.values.confirmPassword}
+          required
+          fullWidth
+        />
+        <Button 
+          type="submit" 
+          variant="contained" 
+          color="primary"
+          fullWidth
+        >
+          新規登録
+        </Button>
+        <Grid container>
+          <Grid item xs>
+            <Link to="/login">
+              既にアカウントを持っていますか?
+            </Link>
+          </Grid>
+        </Grid>
       </form>
-    </div>
+    </Container>
   )
 }
 

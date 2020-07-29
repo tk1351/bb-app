@@ -1,5 +1,6 @@
 import React from 'react';
 import { logout } from '../../module/auth/login';
+import Button from '@material-ui/core/Button';
 
 
 const Profile = () => {
@@ -7,7 +8,7 @@ const Profile = () => {
   return(
     <>
       <p>プロフィール</p>
-      <button onClick={logout}>ログアウト</button>
+      <Button onClick={logout} variant="contained" color="secondary">ログアウト</Button>
     </>
   )
 }
