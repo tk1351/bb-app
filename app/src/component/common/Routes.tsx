@@ -9,7 +9,7 @@ import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Home from './Home';
 import Profile from '../auth/Profile'
-import SubmitBestBuy from '../form/SubmitBestBuy';
+import SubmitBestBuy from '../form/PostBestBuy';
 
 const Routes = () => {
   return(

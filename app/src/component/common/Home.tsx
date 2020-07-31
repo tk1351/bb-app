@@ -1,12 +1,11 @@
 import React from 'react'
-import {
-  Router,
-  Link
-} from "react-router-dom";
+import { Router, Link } from "react-router-dom";
 import history from '../../history'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
+import TimeLine from '../TimeLine';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -20,8 +19,7 @@ const Home = () => {
 
   return(
     <Router history={history}>
-
-      <div>
+      <Container component="main" maxWidth="xs">
         <p>Home</p>
         <p>ようこそ{user}さん</p>
 
@@ -32,10 +30,12 @@ const Home = () => {
         >
           <Link to="/submit">投稿する</Link>
         </Button>
-      </div>
+        <TimeLine />
+        <TimeLine />
+        <TimeLine />
+        <TimeLine />
+      </Container>
     </Router>
-
-    
   )
 }
 

@@ -1,14 +1,26 @@
 import React from 'react'
-import {
-  Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { Router, Link } from "react-router-dom";
 import Routes from './Routes';
 import history from '../../history'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  }),
+);
 
 const Navbar = () => {
+  const classes = useStyles();
+  
   return(
     <Router history={history}>
       <div>

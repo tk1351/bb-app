@@ -1,5 +1,5 @@
 export const profile = () => {
-  console.log(localStorage.getItem("username"))
+  localStorage.getItem("username")
 }
 
 export default profile
