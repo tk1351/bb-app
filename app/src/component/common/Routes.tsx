@@ -10,6 +10,7 @@ import Register from '../auth/Register';
 import Home from './Home';
 import Profile from '../auth/Profile'
 import SubmitBestBuy from '../form/PostBestBuy';
+import BestBuyDetail from '../BestBuyDetail';
 
 const Routes = () => {
   return(
@@ -29,9 +30,11 @@ const Routes = () => {
           <Route path="/profile">
             <Profile />
           </Route>
+          {/* <Route path="/profile/:id" component={Profile} /> */}
           <Route path="/submit">
             <SubmitBestBuy />
           </Route>
+          <Route path="/detail/:id" component={BestBuyDetail} />
         </Switch>
       </div>
   )

@@ -85,7 +85,7 @@ router.post('/login', (req, res) => {
 
 router.delete('/:userId', (req, res) => {
   const userId = req.params.userId
-  User.deleteOne({_id:userId})
+  User.deleteOne({_id: userId})
     .then(function() {
       res.json({ delete: 'success' })
     })

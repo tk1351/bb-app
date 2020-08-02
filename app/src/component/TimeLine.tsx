@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios'
+import { BestBuy } from '../module/bestBuy';
+import history from '../history'
+import { Route } from 'react-router-dom';
+import BestBuyDetail from './BestBuyDetail';
 
 const useStyles = makeStyles({
   root: {
@@ -23,31 +28,66 @@ const useStyles = makeStyles({
   },
 });
 
+const initialValue = [{
+  _id: '',
+  title: '',
+  text: '',
+  tag: '',
+  category: '',
+  url: '',
+  created: new Date()
+}]
+
 const TimeLine = () => {
+  const [bestBuyList, setBestBuyList] = useState<BestBuy[]>(initialValue)
+
+  useEffect(() => {
+    getBestBuy()
+  },[])
+
+  const getBestBuy = async () => {
+    const url = '/api/v1/post'
+
+    try {
+      await axios.get(url)
+        .then((res) => {
+          setBestBuyList(res.data)
+        })
+    } catch(error) {
+      console.error(error)
+    }
+  }
+
+  const learnMore = (bestBuy: BestBuy) => {
+    history.push({
+      pathname: '/detail/' + bestBuy._id,
+      state: {bestBuy}
+    })
+  }
+
   const classes = useStyles();
 
   return(
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          日付
-        </Typography>
-        <Typography variant="h5" component="h2">
-          商品名
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          カテゴリー
-        </Typography>
-        <Typography variant="body2" component="p">
-          詳細
-          <br/>
-          test
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
+    <>
+      {bestBuyList.map(bestBuy => 
+        <Card className={classes.root} onClick={() => learnMore(bestBuy)}>
+          <CardContent>
+            <Typography className={classes.title} color="textSecondary" gutterBottom>
+              日付
+            </Typography>
+            <Typography variant="h5" component="h2">
+              {bestBuy.title}
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              カテゴリー:{bestBuy.category}
+            </Typography>
+            <Typography variant="body2" component="p">
+              詳細を確認する
+            </Typography>
+          </CardContent>
+        </Card>
+      )}
+    </>
   )
 }
 

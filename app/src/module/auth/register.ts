@@ -8,6 +8,14 @@ interface PostRegisterValues {
   confirmPassword: string;
 }
 
+export interface UserDetail {
+  _id: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export const postNewRegister = async (values: PostRegisterValues) => {
   const url = '/api/v1/users/register'
   try {

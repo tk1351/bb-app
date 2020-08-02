@@ -8,6 +8,18 @@ router.get('', (req, res) => {
   })
 })
 
+router.get('/:postId', (req, res) => {
+  const postId = req.params.postId
+  Post.findById(postId, function(err, foundPost) {
+    if(err) {
+      return res.status(422).send(
+        { errors: [{ title: 'Error', detail: 'Post not found' }]}
+      )
+    }
+    return res.json(foundPost)
+  })
+})
+
 router.post('', (req, res) => {
   const ArticlePost = new Post()
 
@@ -25,6 +37,14 @@ router.post('', (req, res) => {
       res.json({ articlepost: 'success' })
     }
   })
+})
+
+router.delete('/:postId', (req, res) => {
+  const postId = req.params.postId
+  Post.deleteOne({_id: postId})
+    .then(function() {
+      res.json({ delete: 'success' })
+    })
 })
 
 module.exports = router

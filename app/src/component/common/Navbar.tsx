@@ -28,7 +28,7 @@ const Navbar = () => {
         <Link to="/home">Home</Link>
         <Link to="/login">ログイン</Link>
         <Link to="/register">新規登録</Link>
-        <Link to="/profile">プロフィール</Link>
+        <Link to="/profile/">プロフィール</Link>
 
         <Routes />
       </div>
