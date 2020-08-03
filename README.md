@@ -11,7 +11,7 @@ node -v
 serverディレクトリへ移動し下記コマンド実行  
 ```  
 npm install  
-npm run start-node  
+npm run start-node or yarn start-node   
 ```  
   
 localhost:3001でHello Worldが表示
