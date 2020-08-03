@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios'
 import { BestBuy } from '../module/bestBuy';
 import history from '../history'
-import { Route } from 'react-router-dom';
-import BestBuyDetail from './BestBuyDetail';
+import moment from 'moment'
 
 const useStyles = makeStyles({
   root: {
@@ -35,8 +32,10 @@ const initialValue = [{
   tag: '',
   category: '',
   url: '',
-  created: new Date()
+  createdAt: new Date()
 }]
+
+moment()
 
 const TimeLine = () => {
   const [bestBuyList, setBestBuyList] = useState<BestBuy[]>(initialValue)

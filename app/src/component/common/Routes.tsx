@@ -11,6 +11,7 @@ import Home from './Home';
 import Profile from '../auth/Profile'
 import SubmitBestBuy from '../form/PostBestBuy';
 import BestBuyDetail from '../BestBuyDetail';
+import UserDetail from '../UserDetail';
 
 const Routes = () => {
   return(
@@ -30,7 +31,7 @@ const Routes = () => {
           <Route path="/profile">
             <Profile />
           </Route>
-          {/* <Route path="/profile/:id" component={Profile} /> */}
+          <Route path="/user/:id" component={UserDetail} />
           <Route path="/submit">
             <SubmitBestBuy />
           </Route>

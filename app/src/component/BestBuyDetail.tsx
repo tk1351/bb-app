@@ -11,7 +11,7 @@ const initialValue = {
   tag: '',
   category: '',
   url: '',
-  created: new Date()
+  createdAt: new Date()
 }
 
 const BestBuyDetail = (props: { location: { state: { bestBuy: { _id: any; }; }; }; }) => {

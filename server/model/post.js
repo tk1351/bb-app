@@ -9,9 +9,9 @@ const PostSchema = new Schema({
   tag: { type: String },
   category: { type: String },
   url: { type: String },
-  fav: { type: Number },
-  created: { type: Date, default: Date.now },
-  updated: { type: Date }
+  fav: { type: Number }
+},{
+  timestamps: true
 })
 
 module.exports = mongoose.model('post', PostSchema)

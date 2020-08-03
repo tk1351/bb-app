@@ -5,5 +5,5 @@ export interface BestBuy {
     tag: string
     category: string
     url: string
-    created: Date
+    createdAt: Date
 }

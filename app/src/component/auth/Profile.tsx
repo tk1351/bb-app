@@ -4,8 +4,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TimeLine from '../TimeLine';
-import { Link } from 'react-router-dom';
-import { UserDetail } from '../../module/auth/register';
+import { UserDetailInfo } from '../../module/auth/register';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,26 +20,32 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const Profile = (props:any) => {
-  // const [user, setUser] = useState<UserDetail>(initialValue)
+const initialValue = {
+  _id: '',
+  username: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+}
+
+const Profile = (props: any) => {
+  // const [userDetail, setUserDetail] = useState<UserDetail>(initialValue)
 
   // useEffect(() => {
   //   getUserById()
-  // },[])
+  // }, [])
 
   // const getUserById = async() => {
-  //   const url = `/api/v1/users/${props.location.state.uid}`
-  //   console.log(user._id)
+  //   const url = `/api/v1/users/${props.location.state.user._id}`
+
   //   try {
   //     await axios.get(url)
   //       .then((res) => {
-  //         setUser(res.data)
-  //         console.log(res.data)
+  //         setUserDetail(res.data)
   //       })
   //   } catch(error) {
   //     console.error(error)
   //   }
-    
   // }
   
   const classes = useStyles()
@@ -58,7 +63,6 @@ const Profile = (props:any) => {
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            {/* <p>ユーザー名{props.location.state.user.username}</p> */}
             <p>ユーザー名</p>
           </Grid>
           <Grid item xs={12}>

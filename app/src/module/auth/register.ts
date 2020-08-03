@@ -8,7 +8,7 @@ interface PostRegisterValues {
   confirmPassword: string;
 }
 
-export interface UserDetail {
+export interface UserDetailInfo {
   _id: string;
   username: string;
   email: string;

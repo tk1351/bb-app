@@ -6,9 +6,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import TimeLine from '../TimeLine';
 import Container from '@material-ui/core/Container';
-import { UserDetail } from '../../module/auth/register';
+import { UserDetailInfo } from '../../module/auth/register';
 import axios from 'axios'
 import Profile from '../auth/Profile';
+import UserDetail from '../UserDetail';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -25,7 +26,7 @@ const initialValue = [{
 }]
 
 const Home = () => {
-  const [list, setList] = useState<UserDetail[]>(initialValue)
+  const [list, setList] = useState<UserDetailInfo[]>(initialValue)
 
   useEffect(() => {
     getUser()
@@ -45,9 +46,9 @@ const Home = () => {
   } 
 
   //MongoDBのIDを渡す
-  const historyPush = (user: UserDetail) => {
+  const historyPush = (user: UserDetailInfo) => {
       history.push({
-        pathname: '/profile/' + user._id,
+        pathname: '/user/' + user._id,
         state: {user} 
     })
   }
@@ -62,15 +63,15 @@ const Home = () => {
   return(
     <Router history={history}>
       <Container component="main" maxWidth="xs">
-        <p>Home</p>
         <p>ようこそ{user}さん</p>
 
-        {/* {list.map(user => 
-          <li key={user._id}>
-            <Route path='/profile/:id' component={Profile} />
-            <span onClick={() => historyPush(user)}>{user.username}</span>
-          </li>
-        )} */}
+        <p>ユーザーリスト</p>
+        {list.map(user => 
+          <ul key={user._id}>
+            <Route path='/user/:id' component={UserDetail} />
+            <a onClick={() => historyPush(user)}>{user.username}</a>
+          </ul>
+        )}
 
         <Button 
           variant="contained" 

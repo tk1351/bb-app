@@ -10,9 +10,9 @@ const ProfileSchema = new Schema({
   address: { type: String },
   post_number: { type: Number },
   follow: { type: Number },
-  follower: { type: Number },
-  created: { type: Date, default: Date.now },
-  updated: { type: Date }
+  follower: { type: Number }
+}, {
+  timestamps: true
 })
 
 module.exports = mongoose.model('profile', ProfileSchema)

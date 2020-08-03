@@ -5,9 +5,9 @@ const CategorySchema = new Schema({
   name: { type: String },
   main: { type: String },
   sub: { type: String },
-  subsub: { type: String },
-  created: { type: Date, default: Date.now },
-  updated: { type: Date }
+  subsub: { type: String }
+}, {
+  timestamps: true
 })
 
 module.exports = mongoose.model('category', CategorySchema)
