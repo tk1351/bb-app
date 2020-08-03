@@ -9,6 +9,7 @@ const profileRoutes = require('./routes/profile')
 const postRoutes = require('./routes/post')
 const categoryRoutes = require('./routes/category')
 const productsRoutes = require('./routes/products')
+const searchPostRoutes = require('./routes/searchPost')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -30,6 +31,7 @@ app.use('/api/v1/profile', profileRoutes)
 app.use('/api/v1/post', postRoutes)
 app.use('/api/v1/category', categoryRoutes)
 app.use('/api/v1/products', productsRoutes)
+app.use('/api/v1/search', searchPostRoutes)
 
 const PORT = process.env.PORT || '3001'
 
