@@ -75,7 +75,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     //BB-Appのリンクの色をとりあえず設定
     routerLink: {
-      color: theme.palette.primary.contrastText
+      color: theme.palette.primary.contrastText,
+      '&:hover': {
+        color: theme.palette.primary.contrastText,
+        textDecoration: 'none'
+      }
     }
   }),
 );
