@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SubmitBestBuy = () => {
+const PostBestBuy = () => {
   const formik = useFormik( {
     initialValues: {
       title: '',
@@ -105,4 +105,4 @@ const SubmitBestBuy = () => {
   )
 }
 
-export default SubmitBestBuy
+export default PostBestBuy

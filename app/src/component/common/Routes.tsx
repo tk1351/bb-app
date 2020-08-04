@@ -9,7 +9,7 @@ import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Home from './Home';
 import Profile from '../auth/Profile'
-import SubmitBestBuy from '../form/PostBestBuy';
+import PostBestBuy from '../form/PostBestBuy';
 import BestBuyDetail from '../BestBuyDetail';
 import UserDetail from '../UserDetail';
 
@@ -33,7 +33,7 @@ const Routes = () => {
           </Route>
           <Route path="/user/:id" component={UserDetail} />
           <Route path="/submit">
-            <SubmitBestBuy />
+            <PostBestBuy />
           </Route>
           <Route path="/detail/:id" component={BestBuyDetail} />
         </Switch>

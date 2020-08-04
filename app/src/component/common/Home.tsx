@@ -2,18 +2,24 @@ import React, { useState, useEffect } from 'react'
 import { Router, Link, Route } from "react-router-dom";
 import history from '../../history'
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import TimeLine from '../TimeLine';
 import Container from '@material-ui/core/Container';
 import { UserDetailInfo } from '../../module/auth/register';
 import axios from 'axios'
-import Profile from '../auth/Profile';
 import UserDetail from '../UserDetail';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => createStyles({
   button: {
     margin: theme.spacing(1),
+  },
+  root: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
   },
 }));
 
@@ -27,6 +33,7 @@ const initialValue = [{
 
 const Home = () => {
   const [list, setList] = useState<UserDetailInfo[]>(initialValue)
+  const [progress, setProgress] = useState(false)
 
   useEffect(() => {
     getUser()
@@ -72,7 +79,6 @@ const Home = () => {
             <a onClick={() => historyPush(user)}>{user.username}</a>
           </ul>
         )}
-
         <Button 
           variant="contained" 
           color="primary"

@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import SearchWindow from './SearchWindow';
+import { red } from '@material-ui/core/colors';
 
 const drawerWidth = 240;
 
@@ -72,6 +73,10 @@ const useStyles = makeStyles((theme: Theme) =>
       textDecoration: "none",
       color: theme.palette.text.secondary,
     },
+    //BB-Appのリンクの色をとりあえず設定
+    routerLink: {
+      color: theme.palette.primary.contrastText
+    }
   }),
 );
 
@@ -108,8 +113,8 @@ const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            BB-App
+          <Typography variant="h6" noWrap color="inherit">
+            <Link to="/home" className={classes.routerLink}>BB-App</Link>
           </Typography>
           <SearchWindow/>
         </Toolbar>
