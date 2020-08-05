@@ -90,7 +90,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false)
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setOpen(!open);
   };
 
   const handleDrawerClose = () => {
@@ -118,7 +118,13 @@ const Navbar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap color="inherit">
-            <Link to="/home" className={classes.routerLink}>BB-App</Link>
+            <Link 
+              to="/home" 
+              className={classes.routerLink} 
+              onClick={handleDrawerClose}
+            >
+              BB-App
+            </Link>
           </Typography>
           <SearchWindow/>
         </Toolbar>
@@ -138,7 +144,7 @@ const Navbar = () => {
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <List onClick={handleDrawerClose}>
           <Link to="/home" className={classes.link}>
             <ListItemText primary="Home" />
           </Link>
