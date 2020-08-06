@@ -11,7 +11,10 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
-  }
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 const PostBestBuy = () => {
@@ -36,6 +39,7 @@ const PostBestBuy = () => {
       <form className={classes.form} noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
         <TextField 
           id="outlined-basic" 
+          margin="normal"
           label="商品名" 
           variant="outlined" 
           name="title"
@@ -47,6 +51,7 @@ const PostBestBuy = () => {
         />
         <TextField
          id="outlined-basic"
+         margin="normal"
          label="紹介文"
          type="text"
          name="text"
@@ -60,6 +65,7 @@ const PostBestBuy = () => {
         />
         <TextField 
           id="outlined-basic" 
+          margin="normal"
           label="タグ" 
           variant="outlined" 
           name="tag"
@@ -71,6 +77,7 @@ const PostBestBuy = () => {
         />
         <TextField 
           id="outlined-basic" 
+          margin="normal"
           label="カテゴリー" 
           variant="outlined" 
           name="category"
@@ -82,6 +89,7 @@ const PostBestBuy = () => {
         />
         <TextField 
           id="outlined-basic" 
+          margin="normal"
           label="URL" 
           variant="outlined" 
           name="url"
@@ -95,6 +103,7 @@ const PostBestBuy = () => {
           type="submit" 
           variant="contained" 
           color="primary"
+          className={classes.submit}
           fullWidth
         >
           投稿

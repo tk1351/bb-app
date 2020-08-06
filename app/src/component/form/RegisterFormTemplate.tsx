@@ -13,7 +13,10 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
-  }
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 const RegisterForm = () => {
@@ -29,6 +32,7 @@ const RegisterForm = () => {
   }})
 
   const classes = useStyles();
+  const unRegister = formik.values.username === '' || formik.values.email === '' || formik.values.password === '' || formik.values.confirmPassword === ''
 
   return (
     <Container component="main" maxWidth="xs">
@@ -36,6 +40,7 @@ const RegisterForm = () => {
       <form className={classes.form} noValidate autoComplete="off"  onSubmit={formik.handleSubmit}>
         <TextField
           id="outlined-basic"
+          margin="normal"
           label="ユーザー名"
           variant="outlined"
           name="username"
@@ -47,6 +52,7 @@ const RegisterForm = () => {
         />
         <TextField
           id="outlined-basic"
+          margin="normal"
           label="メールアドレス"
           variant="outlined"
           name="email"
@@ -59,6 +65,7 @@ const RegisterForm = () => {
         />
         <TextField
           id="outlined-basic"
+          margin="normal"
           label="パスワード"
           variant="outlined"
           name="password"
@@ -70,6 +77,7 @@ const RegisterForm = () => {
         />
         <TextField
           id="outlined-basic"
+          margin="normal"
           label="パスワード（確認用）"
           variant="outlined"
           name="confirmPassword"
@@ -83,6 +91,8 @@ const RegisterForm = () => {
           type="submit" 
           variant="contained" 
           color="primary"
+          disabled={unRegister}
+          className={classes.submit}
           fullWidth
         >
           新規登録
