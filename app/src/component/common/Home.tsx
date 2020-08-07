@@ -9,7 +9,6 @@ import Container from '@material-ui/core/Container';
 import { UserDetailInfo } from '../../module/auth/register';
 import axios from 'axios'
 import UserDetail from '../UserDetail';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   button: {
@@ -33,7 +32,6 @@ const initialValue = [{
 
 const Home = () => {
   const [list, setList] = useState<UserDetailInfo[]>(initialValue)
-  const [progress, setProgress] = useState(false)
 
   useEffect(() => {
     getUser()
@@ -64,6 +62,13 @@ const Home = () => {
     history.push('/submit')
   }
 
+  const usersList = list.map(user => 
+    <ul key={user._id}>
+      <Route path='/user/:id' component={UserDetail} />
+      <a onClick={() => historyPush(user)}>{user.username}</a>
+    </ul>
+  )
+
   const user = localStorage.getItem('username')
   const classes = useStyles();
 
@@ -72,13 +77,8 @@ const Home = () => {
       <Container component="main" maxWidth="xs">
         <p>ようこそ{user}さん</p>
 
-        <p>ユーザーリスト</p>
-        {list.map(user => 
-          <ul key={user._id}>
-            <Route path='/user/:id' component={UserDetail} />
-            <a onClick={() => historyPush(user)}>{user.username}</a>
-          </ul>
-        )}
+        {/* <p>ユーザーリスト</p>
+        {usersList} */}
         <Button 
           variant="contained" 
           color="primary"

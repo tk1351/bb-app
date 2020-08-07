@@ -125,7 +125,7 @@ const TimeLine = () => {
             />
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
-                {bestBuy.category}
+                {bestBuy.text.substring(0,10)}...
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
