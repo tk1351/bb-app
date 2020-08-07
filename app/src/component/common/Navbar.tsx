@@ -123,7 +123,7 @@ const Navbar = () => {
               className={classes.routerLink} 
               onClick={handleDrawerClose}
             >
-              BB-App
+              BestBuy
             </Link>
           </Typography>
           <SearchWindow/>
