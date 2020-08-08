@@ -10,6 +10,7 @@ import { UserDetailInfo } from '../../module/auth/register';
 import axios from 'axios'
 import UserDetail from '../UserDetail';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   button: {
@@ -64,21 +65,21 @@ const Home = () => {
     history.push('/submit')
   }
 
-  const user = localStorage.getItem('username')
+  const {user} = useAuth0();
+  // const user = localStorage.getItem('username')
   const classes = useStyles();
 
   return(
     <Router history={history}>
       <Container component="main" maxWidth="xs">
-        <p>ようこそ{user}さん</p>
-
-        <p>ユーザーリスト</p>
+        {/* <p>ようこそ{user.name}さん</p> */}
+        {/* <p>ユーザーリスト</p>
         {list.map(user => 
           <ul key={user._id}>
             <Route path='/user/:id' component={UserDetail} />
             <a onClick={() => historyPush(user)}>{user.username}</a>
           </ul>
-        )}
+        )} */}
         <Button 
           variant="contained" 
           color="primary"

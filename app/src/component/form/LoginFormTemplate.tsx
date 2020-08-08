@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { Link } from "react-router-dom";
 import { CssBaseline } from '@material-ui/core';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -21,20 +22,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginForm = () => {
+  const {
+    isAuthenticated,
+    loginWithRedirect,
+  } = useAuth0();
+
   const formik = useFormik( {
     initialValues: {
       username: '',
       password: ''
     },
     onSubmit: values => {
-      login(values)
+      // login(values)
+      // loginWithRedirect
     }
   })
 
   const classes = useStyles();
   const unLogin = formik.values.username === '' || formik.values.password === ''
 
-  return (
+  return !isAuthenticated && (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
         <Typography component="h1" variant="h6">ログイン</Typography>

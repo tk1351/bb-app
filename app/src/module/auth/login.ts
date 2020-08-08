@@ -21,8 +21,8 @@ export const login = async (values: PostLoginValues) => {
 
 }
 
-export const logout = () => {
-  localStorage.removeItem('username')
-  localStorage.removeItem('app-auth')
-  history.push('/login')
-}
+// export const logout = () => {
+//   localStorage.removeItem('username')
+//   localStorage.removeItem('app-auth')
+//   history.push('/login')
+// }

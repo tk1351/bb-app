@@ -19,6 +19,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Box } from '@material-ui/core';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -62,6 +63,7 @@ moment()
 const TimeLine = () => {
   const [bestBuyList, setBestBuyList] = useState<BestBuy[]>(initialValue)
   const [expanded, setExpanded] = useState(false)
+  const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
     getBestBuy()
@@ -72,7 +74,11 @@ const TimeLine = () => {
   };
 
   const getBestBuy = async () => {
-    const url = '/api/v1/post'
+    if(!isAuthenticated){
+      return
+    }
+
+    const url = `/api/v1/post/user/${user.sub}`
 
     try {
       await axios.get(url)
@@ -82,6 +88,7 @@ const TimeLine = () => {
     } catch(error) {
       console.error(error)
     }
+    
   }
 
   const learnMore = (bestBuy: BestBuy) => {
@@ -93,10 +100,16 @@ const TimeLine = () => {
 
   const handleImageError = (e: any) => {
     e.target.onerror = null
-    e.target.src = "../../public/no_image_available.jpg"
+    e.target.src = "../assets/no_image_available.jpg"
   }
 
   const classes = useStyles();
+
+  if(!bestBuyList){
+    // FIXME:投稿がない場合のDOMを検討
+    console.log("no post");
+    return <></>;
+  }
 
   return(
     <>

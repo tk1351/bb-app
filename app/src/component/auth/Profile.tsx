@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { logout } from '../../module/auth/login';
 import Button from '@material-ui/core/Button';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TimeLine from '../TimeLine';
 import { UserDetailInfo } from '../../module/auth/register';
 import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
-  }),
+  })
 );
 
 const initialValue = {
@@ -25,8 +25,8 @@ const initialValue = {
   username: '',
   email: '',
   password: '',
-  confirmPassword: ''
-}
+  confirmPassword: '',
+};
 
 const Profile = (props: any) => {
   // const [userDetail, setUserDetail] = useState<UserDetail>(initialValue)
@@ -47,23 +47,31 @@ const Profile = (props: any) => {
   //     console.error(error)
   //   }
   // }
-  
-  const classes = useStyles()
 
-  return(
+  const classes = useStyles();
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const logoutWithRedirect = () =>
+    logout({
+      returnTo: window.location.origin,
+    });
+
+  return (
     <>
       <p>プロフィール</p>
-      <Button 
-        variant="contained"
-        color="primary"
-      >
+      <Button variant='contained' color='primary'>
         プロフィール編集
       </Button>
-      <Button onClick={logout} variant="contained" color="secondary">ログアウト</Button>
+      <Button
+        onClick={logoutWithRedirect}
+        variant='contained'
+        color='secondary'
+      >
+        ログアウト
+      </Button>
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <p>ユーザー名</p>
+            <p>ユーザー名 : {user.name} </p>
           </Grid>
           <Grid item xs={12}>
             <p>bio</p>
@@ -107,7 +115,7 @@ const Profile = (props: any) => {
         </Grid>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;
