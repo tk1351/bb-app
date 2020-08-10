@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import TimeLine from '../TimeLine';
+import TimeLine from '../article/TimeLine';
 import { useAuth0 } from '@auth0/auth0-react';
 import { ProfileInfo } from '../../interface/profile';
 

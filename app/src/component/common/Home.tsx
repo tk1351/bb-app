@@ -4,7 +4,7 @@ import history from '../../history';
 import Button from '@material-ui/core/Button';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
-import TimeLine from '../TimeLine';
+import TimeLine from '../article/TimeLine';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { UserDetailInfo } from '../../interface/userDetailInfo';

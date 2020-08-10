@@ -21,6 +21,7 @@ import {
   List,
   ListItemText,
   Button,
+  Avatar,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -101,6 +102,10 @@ const useStyles = makeStyles((theme: Theme) =>
         color: theme.palette.primary.contrastText,
         textDecoration: 'none',
       },
+    },
+    avater: {
+      width: theme.spacing(4),
+      height: theme.spacing(4),
     },
   })
 );
@@ -205,7 +210,7 @@ const Navbar = () => {
                 aria-haspopup='true'
                 color='inherit'
               >
-                <AccountCircle />
+                <Avatar src={user.picture} className={classes.avater}/>
               </IconButton>
             )}
           </Toolbar>

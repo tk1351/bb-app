@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios'
-import { BestBuy } from '../interface/bestBuy';
+import { BestBuy } from '../../interface/bestBuy';
 import clsx from 'clsx';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -18,7 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Box } from '@material-ui/core';
 import { useAuth0 } from '@auth0/auth0-react';
-import { learnMoreArticleDetail } from '../module/article';
+import { learnMoreArticleDetail } from '../../module/article';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -64,6 +64,7 @@ const TimeLine = () => {
 
   useEffect(() => {
     getBestBuy()
+    console.log(user)
   },[])
 
   const getBestBuy = async () => {

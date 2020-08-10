@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { BestBuy } from '../interface/bestBuy';
+import { BestBuy } from '../../interface/bestBuy';
 import { Button } from '@material-ui/core';
-import history from '../history'
+import history from '../../history'
 
 const initialValue = {
   _id: '',
