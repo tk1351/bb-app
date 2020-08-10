@@ -45,10 +45,6 @@ app.use('/api/v1/category', categoryRoutes)
 app.use('/api/v1/products', productsRoutes)
 app.use('/api/v1/search', searchPostRoutes)
 
-// const port = process.env.API_PORT || 3001;
-// const appPort = process.env.SERVER_PORT || 3000;
-// const appOrigin = authConfig.appOrigin || `http://localhost:${appPort}`;
-
 if (!authConfig.domain || !authConfig.audience) {
   throw new Error(
     "Please make sure that auth_config.json is in place and populated"
@@ -70,7 +66,6 @@ const checkJwt = jwt({
 
 const PORT = process.env.PORT || '3001'
 
-// app.get('/', (req, res) => res.send('Hello World!'))
 app.get("/api/external", checkJwt, (req, res) => {
   res.send({
     msg: "Your access token was successfully validated!"
@@ -78,4 +73,3 @@ app.get("/api/external", checkJwt, (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`I am running on port ${PORT}`));
-// app.listen(port, () => console.log(`API Server listening on port ${port}`));

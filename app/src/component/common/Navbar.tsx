@@ -95,6 +95,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     //BB-Appのリンクの色をとりあえず設定
     routerLink: {
+      textDecoration: 'none',
       color: theme.palette.primary.contrastText,
       '&:hover': {
         color: theme.palette.primary.contrastText,
@@ -192,7 +193,7 @@ const Navbar = () => {
                 className={classes.routerLink}
                 onClick={handleDrawerClose}
               >
-                BestBuy
+                Best Buy
               </Link>
             </Typography>
             <SearchWindow />

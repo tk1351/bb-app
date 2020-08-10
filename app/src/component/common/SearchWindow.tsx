@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SearchIcon from '@material-ui/icons/Search';
 import { InputBase, makeStyles, createStyles, Theme, fade } from '@material-ui/core';
 import { useFormik } from 'formik';
-import axios from 'axios';
+import { searchArticle } from '../../module/search';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,10 +48,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface QueryParam {
-  queryParam: string
-}
-
 const SearchWindow = () => {
   const classes = useStyles();
   
@@ -61,19 +57,7 @@ const SearchWindow = () => {
     },
     onSubmit: queryParam => {
       console.log(queryParam)
-      const search = async (queryParam: QueryParam) => {
-        const url = '/api/v1/search/searchPost'
-
-        try {
-          await axios.post(url, queryParam)
-            .then((res) => {
-              console.log(res.data)
-            })
-        } catch (error) {
-          console.error(error)
-        }
-      }
-      search(queryParam)
+      searchArticle(queryParam)
     }
   })
 

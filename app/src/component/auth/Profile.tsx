@@ -3,9 +3,8 @@ import Button from '@material-ui/core/Button';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TimeLine from '../TimeLine';
-import { UserDetailInfo } from '../../module/auth/register';
-import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
+import { ProfileInfo } from '../../interface/profile';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,40 +19,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const initialValue = {
-  _id: '',
-  username: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-};
-
-const Profile = (props: any) => {
-  // const [userDetail, setUserDetail] = useState<UserDetail>(initialValue)
-
-  // useEffect(() => {
-  //   getUserById()
-  // }, [])
-
-  // const getUserById = async() => {
-  //   const url = `/api/v1/users/${props.location.state.user._id}`
-
-  //   try {
-  //     await axios.get(url)
-  //       .then((res) => {
-  //         setUserDetail(res.data)
-  //       })
-  //   } catch(error) {
-  //     console.error(error)
-  //   }
-  // }
+const Profile = (props: ProfileInfo) => {
 
   const classes = useStyles();
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  const logoutWithRedirect = () =>
-    logout({
-      returnTo: window.location.origin,
-    });
+  
+  const logoutWithRedirect = () => 
+  logout({
+    returnTo: window.location.origin
+  })
 
   return (
     <>
@@ -71,7 +45,7 @@ const Profile = (props: any) => {
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <p>ユーザー名 : {user.name} </p>
+            <p>ユーザー名 : {user} </p>
           </Grid>
           <Grid item xs={12}>
             <p>bio</p>
