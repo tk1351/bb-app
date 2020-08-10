@@ -18,6 +18,14 @@ const authConfig = require("./auth_config.json");
 
 const appPort = process.env.SERVER_PORT || 3000;
 const appOrigin = authConfig.appOrigin || `http://localhost:${appPort}`;
+const PORT = process.env.PORT || '3001'
+
+const AWS = require('aws-sdk');
+const uuid = require('uuid');
+
+const AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+const AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+const BUCKET = process.env.BUCKET;
 
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -45,10 +53,6 @@ app.use('/api/v1/category', categoryRoutes)
 app.use('/api/v1/products', productsRoutes)
 app.use('/api/v1/search', searchPostRoutes)
 
-// const port = process.env.API_PORT || 3001;
-// const appPort = process.env.SERVER_PORT || 3000;
-// const appOrigin = authConfig.appOrigin || `http://localhost:${appPort}`;
-
 if (!authConfig.domain || !authConfig.audience) {
   throw new Error(
     "Please make sure that auth_config.json is in place and populated"
@@ -68,14 +72,81 @@ const checkJwt = jwt({
   algorithms: ["RS256"]
 });
 
-const PORT = process.env.PORT || '3001'
-
-// app.get('/', (req, res) => res.send('Hello World!'))
 app.get("/api/external", checkJwt, (req, res) => {
   res.send({
     msg: "Your access token was successfully validated!"
   });
 });
 
-app.listen(PORT, () => console.log(`I am running on port ${PORT}`));
-// app.listen(port, () => console.log(`API Server listening on port ${port}`));
+AWS.config.getCredentials(function(err) {
+  if (err) console.log(err.stack);
+  // credentials not loaded
+  else {
+    console.log("Access key:", AWS.config.credentials.accessKeyId);
+    console.log("Region: ", AWS.config.region);
+  }
+});
+
+// Create unique bucket name
+const bucketName = 'node-sdk-sample-' + uuid.v4();
+// Create name for uploaded object key
+const keyName = 'hello_world.txt';
+
+// Create a promise on S3 service object
+const bucketPromise = new AWS.S3({apiVersion: '2006-03-01'}).createBucket({Bucket: bucketName}).promise();
+
+// Handle promise fulfilled/rejected states
+bucketPromise.then(
+  function(data) {
+    // Create params for putObject call
+    var objectParams = {Bucket: bucketName, Key: keyName, Body: 'Hello World!'};
+    // Create object upload promise
+    var uploadPromise = new AWS.S3({apiVersion: '2006-03-01'}).putObject(objectParams).promise();
+    uploadPromise.then(
+      function(data) {
+        console.log("Successfully uploaded data to " + bucketName + "/" + keyName);
+      });
+}).catch(
+  function(err) {
+    console.error(err, err.stack);
+});
+
+// app.get('/upload', (req, res) => {
+//   upload(req.query).then(url => {
+//     res.json({url: url});
+//   }).catch(e => {
+//     console.log(e);
+//   });
+// });
+
+app.listen(PORT, error => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.info('listen: ', PORT);
+  }
+});
+
+// aws.config.update({
+//   accessKeyId: AWS_ACCESS_KEY,
+//   secretAccessKey: AWS_SECRET_KEY
+// });
+
+// function upload(file) {
+//   const s3 = new aws.S3();
+//   const params = {
+//     Bucket: BUCKET,
+//     Key: file.filename,
+//     Expires: 60,
+//     ContentType: file.filetype
+//   };
+
+//   return new Promise((resolve, reject) => {
+//     s3.getSignedUrl('putObject', params, (err, url) => {
+//       if (err) {
+//         reject(err);
+//       }
+//       resolve(url);
+//     });
+//   });
+// }
