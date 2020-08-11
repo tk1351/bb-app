@@ -4,9 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios'
-import { BestBuy } from '../module/bestBuy';
-import history from '../history'
-import moment from 'moment'
+import { BestBuy } from '../interface/bestBuy';
 import clsx from 'clsx';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -20,6 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Box } from '@material-ui/core';
 import { useAuth0 } from '@auth0/auth0-react';
+import { learnMoreArticleDetail } from '../module/article';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -58,20 +57,14 @@ const initialValue = [{
   createdAt: new Date()
 }]
 
-moment()
-
 const TimeLine = () => {
-  const [bestBuyList, setBestBuyList] = useState<BestBuy[]>(initialValue)
+  const [bestBuyLists, setBestBuyLists] = useState<BestBuy[]>(initialValue)
   const [expanded, setExpanded] = useState(false)
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
     getBestBuy()
   },[])
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   const getBestBuy = async () => {
     if(!isAuthenticated){
@@ -83,7 +76,7 @@ const TimeLine = () => {
     try {
       await axios.get(url)
         .then((res) => {
-          setBestBuyList(res.data)
+          setBestBuyLists(res.data)
         })
     } catch(error) {
       console.error(error)
@@ -91,21 +84,9 @@ const TimeLine = () => {
     
   }
 
-  const learnMore = (bestBuy: BestBuy) => {
-    history.push({
-      pathname: '/detail/' + bestBuy._id,
-      state: {bestBuy}
-    })
-  }
-
-  const handleImageError = (e: any) => {
-    e.target.onerror = null
-    e.target.src = "../assets/no_image_available.jpg"
-  }
-
   const classes = useStyles();
 
-  if(!bestBuyList){
+  if(!bestBuyLists){
     // FIXME:投稿がない場合のDOMを検討
     console.log("no post");
     return <></>;
@@ -113,9 +94,9 @@ const TimeLine = () => {
 
   return(
     <>
-      {bestBuyList.map(bestBuy =>
+      {bestBuyLists.map(bestBuy =>
         <Box m={2}>
-          <Card raised className={classes.root} onClick={() => learnMore(bestBuy)}>
+          <Card raised className={classes.root} onClick={() => learnMoreArticleDetail(bestBuy)}>
             <CardHeader
               avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
@@ -134,7 +115,6 @@ const TimeLine = () => {
               className={classes.media}
               image="/d9dddc.png"
               title={bestBuy.title}
-              onError={handleImageError}
             />
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
@@ -152,7 +132,6 @@ const TimeLine = () => {
                 className={clsx(classes.expand, {
                   [classes.expandOpen]: expanded,
                 })}
-                onClick={handleExpandClick}
                 aria-expanded={expanded}
                 aria-label="show more"
               >

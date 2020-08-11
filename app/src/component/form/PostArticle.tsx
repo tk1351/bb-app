@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { useFormik } from 'formik';
-import { postBestBuy } from '../../module/postBestBuy';
+import { postArticle } from '../../module/article';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PostBestBuy = () => {
+const PostArticle = () => {
   const { user } = useAuth0();
 
   const formik = useFormik({
@@ -31,7 +31,7 @@ const PostBestBuy = () => {
       url: '',
     },
     onSubmit: (values) => {
-      postBestBuy(values);
+      postArticle(values);
     },
   });
 
@@ -124,4 +124,4 @@ const PostBestBuy = () => {
   );
 };
 
-export default PostBestBuy;
+export default PostArticle;

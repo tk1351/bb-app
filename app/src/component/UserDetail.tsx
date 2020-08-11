@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Grid, makeStyles, createStyles, Theme, Container } from '@material-ui/core'
 import TimeLine from './TimeLine'
-import { UserDetailInfo } from '../module/auth/register';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,8 +24,8 @@ const initialValue = {
   confirmPassword: ''
 }
 
-const UserDetail = (props: { location: { state: { user: { _id: any; }; }; }; }) => {
-  const [userDetail, setUserDetail] = useState<UserDetailInfo>(initialValue)
+const UserDetail = (props: { location: { state: { user: { _id: string; }; }; }; }) => {
+  const [userDetail, setUserDetail] = useState<any>(initialValue)
 
   useEffect(() => {
     getUserById()
@@ -46,6 +45,7 @@ const UserDetail = (props: { location: { state: { user: { _id: any; }; }; }; }) 
   }
 
   const classes = useStyles()
+  
   return(
     <>
       <p>プロフィール</p>

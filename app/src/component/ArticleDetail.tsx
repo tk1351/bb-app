@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { BestBuy } from '../module/bestBuy';
+import { BestBuy } from '../interface/bestBuy';
 import { Button } from '@material-ui/core';
 import history from '../history'
 
@@ -12,9 +12,9 @@ const initialValue = {
   category: '',
   url: '',
   createdAt: new Date()
-}
+} 
 
-const BestBuyDetail = (props: { location: { state: { bestBuy: { _id: any; }; }; }; }) => {
+const ArticleDetail = (props: { location: { state: { bestBuy: { _id: string; }; }; }; }) => {
   const [bestBuyDetail, setBestBuyDetail] = useState<BestBuy>(initialValue)
 
   useEffect(() => {
@@ -61,4 +61,4 @@ const BestBuyDetail = (props: { location: { state: { bestBuy: { _id: any; }; }; 
   )
 }
 
-export default BestBuyDetail
+export default ArticleDetail

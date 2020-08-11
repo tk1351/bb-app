@@ -93,7 +93,7 @@ const bucketName = 'node-sdk-sample-' + uuid.v4();
 const keyName = 'hello_world.txt';
 
 // Create a promise on S3 service object
-const bucketPromise = new AWS.S3({apiVersion: '2006-03-01'}).createBucket({Bucket: bucketName}).promise();
+var bucketPromise = new AWS.S3({apiVersion: '2006-03-01'}).createBucket({Bucket: bucketName}).promise();
 
 // Handle promise fulfilled/rejected states
 bucketPromise.then(
