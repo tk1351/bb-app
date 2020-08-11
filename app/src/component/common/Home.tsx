@@ -4,25 +4,12 @@ import history from '../../history';
 import Button from '@material-ui/core/Button';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
-import TimeLine from '../TimeLine';
+import TimeLine from '../article/TimeLine';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { UserDetailInfo } from '../../interface/userDetailInfo';
 import { pushPostArticlePage } from '../../module/location';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    button: {
-      margin: theme.spacing(1),
-    },
-    root: {
-      display: 'flex',
-      '& > * + *': {
-        marginLeft: theme.spacing(2),
-      },
-    },
-  })
-);
+import { useStyles } from '../../styles/home'
 
 const initialValue = [
   {

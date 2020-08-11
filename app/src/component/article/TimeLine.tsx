@@ -1,51 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios'
-import { BestBuy } from '../interface/bestBuy';
+import { BestBuy } from '../../interface/bestBuy';
 import clsx from 'clsx';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import { blue } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Box } from '@material-ui/core';
 import { useAuth0 } from '@auth0/auth0-react';
-import { learnMoreArticleDetail } from '../module/article';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: blue[500],
-  },
-}));
-
-const theme = {
-  spacing: 1,
-}
+import { learnMoreArticleDetail } from '../../module/article';
+import { useStyles } from '../../styles/timeLine'
 
 const initialValue = [{
   _id: '',
@@ -64,6 +36,7 @@ const TimeLine = () => {
 
   useEffect(() => {
     getBestBuy()
+    console.log(user)
   },[])
 
   const getBestBuy = async () => {
