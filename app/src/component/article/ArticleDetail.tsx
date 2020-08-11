@@ -6,6 +6,7 @@ import history from '../../history'
 
 const initialValue = {
   _id: '',
+  uid: '',
   title: '',
   text: '',
   tag: '',

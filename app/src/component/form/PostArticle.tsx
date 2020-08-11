@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -14,12 +13,14 @@ const PostArticle = () => {
 
   const formik = useFormik({
     initialValues: {
-      uid: user.sub,
+      //FIXME: uidの型を要検討
+      uid: user.sub as string,
       title: '',
       text: '',
       tag: '',
       category: '',
       url: '',
+      createdAt: new Date()
     },
     onSubmit: (values) => {
       postArticle(values);

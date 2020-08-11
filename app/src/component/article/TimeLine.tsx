@@ -21,6 +21,7 @@ import { useStyles } from '../../styles/timeLine'
 
 const initialValue = [{
   _id: '',
+  uid: '',
   title: '',
   text: '',
   tag: '',
