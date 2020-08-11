@@ -9,20 +9,7 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { UserDetailInfo } from '../../interface/userDetailInfo';
 import { pushPostArticlePage } from '../../module/location';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    button: {
-      margin: theme.spacing(1),
-    },
-    root: {
-      display: 'flex',
-      '& > * + *': {
-        marginLeft: theme.spacing(2),
-      },
-    },
-  })
-);
+import { useStyles } from '../../styles/home'
 
 const initialValue = [
   {

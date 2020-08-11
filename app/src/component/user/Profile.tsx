@@ -5,19 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import TimeLine from '../article/TimeLine';
 import { useAuth0 } from '@auth0/auth0-react';
 import { ProfileInfo } from '../../interface/profile';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  })
-);
+import { useStyles } from '../../styles/profile'
 
 const Profile = (props: ProfileInfo) => {
 

@@ -3,13 +3,7 @@ import clsx from 'clsx';
 import { Router, Link } from 'react-router-dom';
 import Routes from './Routes';
 import history from '../../history';
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  fade,
-  useTheme,
-} from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
@@ -31,84 +25,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { useStyles } from '../../styles/nabvar'
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-    },
-    appBar: {
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-    appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    hide: {
-      display: 'none',
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    drawerHeader: {
-      display: 'flex',
-      alignItems: 'center',
-      padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
-      justifyContent: 'flex-end',
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      marginLeft: -drawerWidth,
-    },
-    contentShift: {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    },
-    link: {
-      textDecoration: 'none',
-      color: theme.palette.text.secondary,
-    },
-    //BB-Appのリンクの色をとりあえず設定
-    routerLink: {
-      textDecoration: 'none',
-      color: theme.palette.primary.contrastText,
-      '&:hover': {
-        color: theme.palette.primary.contrastText,
-        textDecoration: 'none',
-      },
-    },
-    avater: {
-      width: theme.spacing(4),
-      height: theme.spacing(4),
-    },
-  })
-);
 
 const Navbar = () => {
   const classes = useStyles();

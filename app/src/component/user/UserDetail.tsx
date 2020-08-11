@@ -2,19 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, Grid, makeStyles, createStyles, Theme, Container } from '@material-ui/core'
 import TimeLine from '../article/TimeLine'
 import axios from 'axios';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  }),
-);
+import { useStyles } from '../../styles/userDetail'
 
 const initialValue = {
   _id: '',
