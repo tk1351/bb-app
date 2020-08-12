@@ -7,14 +7,16 @@ import { useFormik } from 'formik';
 import { postArticle } from '../../module/article';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useStyles } from '../../styles/postArticle'
+import axios from 'axios'
+import { BestBuy } from '../../interface/bestBuy';
 
 const PostArticle = () => {
-  const { user } = useAuth0();
+
+  const { user, isAuthenticated } = useAuth0();
 
   const formik = useFormik({
     initialValues: {
-      //FIXME: uidの型を要検討
-      uid: user.sub as string,
+      uid: '',
       title: '',
       text: '',
       tag: '',
@@ -23,9 +25,26 @@ const PostArticle = () => {
       createdAt: new Date()
     },
     onSubmit: (values) => {
-      postArticle(values);
+      postArticleWithUid(values);
     },
   });
+
+  const postArticleWithUid = async (values: BestBuy) => {
+    if(!isAuthenticated){
+      return
+    }
+    const url = `/api/v1/users/${user.sub}`
+
+    try {
+      await axios.get(url)
+        .then((res) => {
+          const newValues = {...values, uid: res.data[0]._id}
+          postArticle(newValues)
+        })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const classes = useStyles();
 

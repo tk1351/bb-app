@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../model/post');
 
+router.get('', (req, res) => {
+  Post.find({}, function(err, foundPost) {
+    return res.json(foundPost)
+  })
+})
+
 router.get('/user/:uid', (req, res) => {
   const uid = req.params.uid;
   console.log(uid);
