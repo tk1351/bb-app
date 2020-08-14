@@ -91,7 +91,7 @@ const TimeLine = () => {
     <>
       {bestBuyLists.map(bestBuy =>
         <Box m={2}>
-          <Card raised className={classes.root} onClick={() => learnMoreArticleDetail(bestBuy)}>
+          <Card raised className={classes.root}>
             <CardHeader
               avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
@@ -105,14 +105,16 @@ const TimeLine = () => {
               }
               title={bestBuy.title}
               subheader="September 14, 2016"
+              onClick={() => learnMoreArticleDetail(bestBuy)}
             />
             <CardMedia
               className={classes.media}
               image="/d9dddc.png"
               title={bestBuy.title}
+              onClick={() => learnMoreArticleDetail(bestBuy)}
             />
             <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body2" color="textSecondary" component="p" onClick={() => learnMoreArticleDetail(bestBuy)}>
                 {bestBuy.text.substring(0,10)}...
               </Typography>
             </CardContent>
@@ -129,6 +131,7 @@ const TimeLine = () => {
                 })}
                 aria-expanded={expanded}
                 aria-label="show more"
+                onClick={() => learnMoreArticleDetail(bestBuy)}
               >
               <ExpandMoreIcon />
             </IconButton>

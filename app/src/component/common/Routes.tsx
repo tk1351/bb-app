@@ -13,7 +13,6 @@ import ArticleDetail from '../article/ArticleDetail';
 const Routes = () => {
   return(
       <div>
-        {/* Homeへのリダイレクト */}
         {/* <Redirect to="/home" /> */}
         <Switch>
           <Route path="/home" component={Home} />

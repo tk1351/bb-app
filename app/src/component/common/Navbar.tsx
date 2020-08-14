@@ -22,7 +22,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import SearchWindow from './SearchWindow';
 import { useAuth0 } from '@auth0/auth0-react';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { useStyles } from '../../styles/nabvar'

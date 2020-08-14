@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   avatar: {
     backgroundColor: blue[500],
-  },
+  }
 }));
 
 const theme = {
