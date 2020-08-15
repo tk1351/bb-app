@@ -1,5 +1,6 @@
 export interface BestBuy {
-    _id: string
+    _id?: string
+    uid: string
     title: string
     text: string
     tag: string

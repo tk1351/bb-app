@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -8,23 +7,44 @@ import { useFormik } from 'formik';
 import { postArticle } from '../../module/article';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useStyles } from '../../styles/postArticle'
+import axios from 'axios'
+import { BestBuy } from '../../interface/bestBuy';
 
 const PostArticle = () => {
-  const { user } = useAuth0();
+
+  const { user, isAuthenticated } = useAuth0();
 
   const formik = useFormik({
     initialValues: {
-      uid: user.sub,
+      uid: '',
       title: '',
       text: '',
       tag: '',
       category: '',
       url: '',
+      createdAt: new Date()
     },
     onSubmit: (values) => {
-      postArticle(values);
+      postArticleWithUid(values);
     },
   });
+
+  const postArticleWithUid = async (values: BestBuy) => {
+    if(!isAuthenticated){
+      return
+    }
+    const url = `/api/v1/users/${user.sub}`
+
+    try {
+      await axios.get(url)
+        .then((res) => {
+          const newValues = {...values, uid: res.data[0]._id}
+          postArticle(newValues)
+        })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const classes = useStyles();
 

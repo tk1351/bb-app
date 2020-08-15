@@ -21,6 +21,7 @@ import { useStyles } from '../../styles/timeLine'
 
 const initialValue = [{
   _id: '',
+  uid: '',
   title: '',
   text: '',
   tag: '',
@@ -35,26 +36,47 @@ const TimeLine = () => {
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
-    getBestBuy()
-    console.log(user)
+    insertUserInfo()
+    getOwnArticles()
   },[])
 
-  const getBestBuy = async () => {
-    if(!isAuthenticated){
+  //FIXME: Auth0のRulesへ移行を検討
+  const insertUserInfo = async () => {
+    if (!isAuthenticated) {
       return
     }
 
-    const url = `/api/v1/post/user/${user.sub}`
+    const url = '/api/v1/users'
+
+    try {
+      await axios.post(url, user)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  //FIXME: 名前やばいから変更
+  const getOwnArticles = async () => {
+    if (!isAuthenticated) {
+      return
+    }
+
+    const url = `/api/v1/users/${user.sub}`
 
     try {
       await axios.get(url)
         .then((res) => {
-          setBestBuyLists(res.data)
+          const uid = res.data[0]._id
+          const uidUrl = `/api/v1/post/user/${uid}`
+
+          axios.get(uidUrl)
+            .then((res) => {
+              setBestBuyLists(res.data)
+            })
         })
-    } catch(error) {
+    } catch (error) {
       console.error(error)
     }
-    
   }
 
   const classes = useStyles();
@@ -69,7 +91,7 @@ const TimeLine = () => {
     <>
       {bestBuyLists.map(bestBuy =>
         <Box m={2}>
-          <Card raised className={classes.root} onClick={() => learnMoreArticleDetail(bestBuy)}>
+          <Card raised className={classes.root}>
             <CardHeader
               avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
@@ -83,14 +105,16 @@ const TimeLine = () => {
               }
               title={bestBuy.title}
               subheader="September 14, 2016"
+              onClick={() => learnMoreArticleDetail(bestBuy)}
             />
             <CardMedia
               className={classes.media}
               image="/d9dddc.png"
               title={bestBuy.title}
+              onClick={() => learnMoreArticleDetail(bestBuy)}
             />
             <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body2" color="textSecondary" component="p" onClick={() => learnMoreArticleDetail(bestBuy)}>
                 {bestBuy.text.substring(0,10)}...
               </Typography>
             </CardContent>
@@ -107,6 +131,7 @@ const TimeLine = () => {
                 })}
                 aria-expanded={expanded}
                 aria-label="show more"
+                onClick={() => learnMoreArticleDetail(bestBuy)}
               >
               <ExpandMoreIcon />
             </IconButton>

@@ -1,11 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { BestBuy } from '../../interface/bestBuy';
-import { Button } from '@material-ui/core';
+import { 
+  Button, 
+  Box, 
+  Card, 
+  CardHeader, 
+  Avatar, 
+  IconButton, 
+  CardMedia, 
+  CardContent, 
+  Typography, 
+  CardActions,
+  Link,
+  Container,  
+} from '@material-ui/core';
 import history from '../../history'
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { useStyles } from '../../styles/timeLine'
+import { goBackTimeLine } from '../../module/location';
 
 const initialValue = {
   _id: '',
+  uid: '',
   title: '',
   text: '',
   tag: '',
@@ -47,15 +66,70 @@ const ArticleDetail = (props: { location: { state: { bestBuy: { _id: string; }; 
     }
   }
 
+  const classes = useStyles();
+
   return(
     <>
-      <p>BestBuy 詳細</p>
-      <p>日付：</p>
-      <p>{bestBuyDetail.title}</p>
-      <p>{bestBuyDetail.text}</p>
-      <a href="">{bestBuyDetail.url}</a>
-      <div>
-        <Button onClick={deleteBestBuy} variant="contained" color="secondary">削除</Button>
+      <Container component='main' maxWidth='xs'>
+          <Card raised className={classes.root}>
+            <CardHeader
+              avatar={
+                <Avatar aria-label="recipe" className={classes.avatar}>
+                  B
+                </Avatar>
+              }
+              action={
+                <IconButton aria-label="settings">
+                  <MoreVertIcon />
+                </IconButton>
+              }
+              title={bestBuyDetail.title}
+              subheader="September 14, 2016"
+            />
+            <CardMedia
+              className={classes.media}
+              image="/d9dddc.png"
+              title={bestBuyDetail.title}
+            />
+            <CardContent>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {bestBuyDetail.text}
+              </Typography>
+              <Link
+                component="button"
+                variant="body2"
+                onClick={() => {
+                  console.info("I'm a button.");
+                }}
+              >
+                {bestBuyDetail.url}
+              </Link>
+            </CardContent>
+            <CardActions disableSpacing>
+              <IconButton aria-label="add to favorites">
+                <FavoriteIcon />
+              </IconButton>
+              <IconButton aria-label="share">
+                <ShareIcon />
+              </IconButton>
+            </CardActions>
+          </Card>
+        </Container>
+        <div>
+          <Button 
+            onClick={goBackTimeLine} 
+            variant="contained" 
+            color="primary"
+          >
+            タイムラインへ戻る
+          </Button>
+          <Button 
+            onClick={deleteBestBuy} 
+            variant="contained" 
+            color="secondary"
+          >
+            削除
+          </Button>
       </div>
     </>
   )
