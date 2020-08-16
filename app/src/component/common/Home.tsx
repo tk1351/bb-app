@@ -70,6 +70,9 @@ const Home = () => {
             </div>
             {/* FIXME: 実際の投稿を表示させる */}
             <Container className={classes.cardGrid} maxWidth="md">
+              <Typography variant="h6" align="center" color="textSecondary" paragraph>
+                人気記事
+              </Typography>
               <Grid container spacing={4}>
                 {cards.map((card) => (
                   <Grid item key={card} xs={12} sm={6} md={4}>

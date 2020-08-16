@@ -3,7 +3,6 @@ export interface BestBuy {
     uid: string
     title: string
     text: string
-    tag: string
     category: string
     url: string
     createdAt: Date

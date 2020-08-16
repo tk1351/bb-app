@@ -34,10 +34,12 @@ router.post('', (req, res) => {
   ArticlePost.uid = req.body.uid;
   ArticlePost.title = req.body.title;
   ArticlePost.text = req.body.text;
-  ArticlePost.tag = req.body.tag;
+  ArticlePost.tags = req.body.tags;
   ArticlePost.category = req.body.category;
   ArticlePost.url = req.body.url;
   ArticlePost.created = req.body.created;
+
+  console.log(req.body)
 
   ArticlePost.save(function (err) {
     if (err) {
