@@ -6,7 +6,7 @@ const PostSchema = new Schema({
   title: { type: String, max:[30] },
   text: { type: String },
   image: { type: String },
-  tag: { type: String },
+  tags: { type: [String] },
   category: { type: String },
   url: { type: String },
   fav: { type: Number }
