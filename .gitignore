@@ -3,3 +3,4 @@ node_modules/
 # Config Files
 /server/config/dev.js
 /server/auth_config.json
+/app/src/auth_config.json
