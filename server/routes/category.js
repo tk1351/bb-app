@@ -15,7 +15,6 @@ router.post('', (req, res) => {
   CategoryPost.main = req.body.main
   CategoryPost.sub = req.body.sub
   CategoryPost.subsub = req.body.subsub
-  CategoryPost.created = req.body.created
 
   CategoryPost.save(function(err) {
     if(err) {
@@ -23,6 +22,13 @@ router.post('', (req, res) => {
     } else {
       res.json({ categorypost: 'success' })
     }
+  })
+})
+
+router.delete('/:categoryId', (req, res) => {
+  const categoryId = req.params.categoryId
+  Category.deleteOne({ _id: categoryId }).then(function () {
+    res.json({ delete: 'success' })
   })
 })
 

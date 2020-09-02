@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const CategorySchema = new Schema({
-  name: { type: String },
+  name: { type: String, required: true },
   main: { type: String },
   sub: { type: String },
   subsub: { type: String }

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -11,32 +11,37 @@ import axios from 'axios'
 import { BestBuy } from '../../interface/bestBuy';
 import { MenuItem } from '@material-ui/core';
 import ChipInput from "material-ui-chip-input";
+import { Category } from '../../interface/category';
 
-const cats = [
-  { value: '料理', label: '料理' },
-  { value: '掃除', label: '掃除' },
-  { value: 'スポーツ', label: 'スポーツ' }
-]
+const initialCategory = [{
+  _id: '',
+  name: ''
+}]
+
+const initialValues = {
+  uid: '',
+  title: '',
+  text: '',
+  category: '',
+  url: '',
+  createdAt: new Date()
+}
 
 const PostArticle = () => {
   const { user, isAuthenticated } = useAuth0()
   const [tags,setTags] = useState<string[]>([])
+  const [categories, setCategories] = useState<Category[]>(initialCategory)
 
-  const initialValues = {
-    uid: '',
-    title: '',
-    text: '',
-    category: '',
-    url: '',
-    createdAt: new Date()
-  }
+  useEffect(() => {
+    getCategoriesName()
+  },[])
 
-  const handleAddChip = (chip:string) => {
+  const handleAddChip = (chip: string) => {
     setTags(prev => [...prev,chip])
   }
 
   const postArticleWithUid = async (values: BestBuy) => {
-    if(!isAuthenticated){
+    if (!isAuthenticated) {
       return
     }
     const url = `/api/v1/users/${user.sub}`
@@ -45,6 +50,18 @@ const PostArticle = () => {
         .then((res) => {
           const newValues = {...values, tags, uid: res.data[0]._id}
           postArticle(newValues)
+        })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const getCategoriesName = async () => {
+    const url = '/api/v1/category'
+    try {
+      await axios.get(url)
+        .then((res) => {
+          setCategories(res.data)
         })
     } catch (error) {
       console.error(error)
@@ -114,9 +131,9 @@ const PostArticle = () => {
               required
               fullWidth
             >
-              {cats.map((cat) => (
-                <MenuItem key={cat.value} value={cat.value}>
-                  {cat.label}
+              {categories.map((category: Category) => (
+                <MenuItem key={category.name} value={category.name}>
+                  {category.name}
                 </MenuItem>
               ))}
             </TextField>

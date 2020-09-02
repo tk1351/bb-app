@@ -18,6 +18,7 @@ import { Box } from '@material-ui/core';
 import { useAuth0 } from '@auth0/auth0-react';
 import { learnMoreArticleDetail } from '../../module/article';
 import { useStyles } from '../../styles/timeLine'
+import { useSelector } from 'react-redux'
 
 const initialValue = [{
   _id: '',
@@ -34,6 +35,15 @@ const TimeLine = () => {
   const [bestBuyLists, setBestBuyLists] = useState<BestBuy[]>(initialValue)
   const [expanded, setExpanded] = useState(false)
   const { user, isAuthenticated } = useAuth0();
+
+  // const articles = useSelector((state: any) => state.articles)
+
+  // const renderedArticles = articles.map((article: any) => (
+  //   <>
+  //     <h3>{ article.title }</h3>
+  //     <p>{ article.text }</p>
+  //   </>
+  // ))
 
   useEffect(() => {
     insertUserInfo()
@@ -86,6 +96,7 @@ const TimeLine = () => {
     console.log("no post");
     return <></>;
   }
+  //
 
   return(
     <>
