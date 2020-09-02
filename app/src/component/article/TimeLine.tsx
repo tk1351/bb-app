@@ -25,7 +25,7 @@ const initialValue = [{
   uid: '',
   title: '',
   text: '',
-  tag: [],
+  tags: [],
   category: '',
   url: '',
   createdAt: new Date()

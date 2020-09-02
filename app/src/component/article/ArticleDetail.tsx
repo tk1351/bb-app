@@ -3,7 +3,6 @@ import axios from 'axios';
 import { BestBuy } from '../../interface/bestBuy';
 import { 
   Button, 
-  Box, 
   Card, 
   CardHeader, 
   Avatar, 
@@ -13,7 +12,9 @@ import {
   Typography, 
   CardActions,
   Link,
-  Container,  
+  Container,
+  Chip,
+  Paper,  
 } from '@material-ui/core';
 import history from '../../history'
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -27,7 +28,7 @@ const initialValue = {
   uid: '',
   title: '',
   text: '',
-  tag: [],
+  tags: [''],
   category: '',
   url: '',
   createdAt: new Date()
@@ -94,6 +95,16 @@ const ArticleDetail = (props: { location: { state: { bestBuy: { _id: string; }; 
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
                 {bestBuyDetail.text}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                カテゴリー：{bestBuyDetail.category}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {bestBuyDetail.tags.map(tag =>
+                  <li className={classes.chipRoot}>
+                    <Chip label={tag} className={classes.chip} />
+                  </li>
+                )}
               </Typography>
               <Link
                 component="button"

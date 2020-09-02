@@ -21,7 +21,18 @@ export const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   avatar: {
     backgroundColor: blue[500],
-  }
+  },
+  chipRoot: {
+    display: 'inline-block',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(0.5),
+    },
+  },
+  chip: {
+    margin: theme.spacing(0.5),
+  },
 }));
 
 const theme = {

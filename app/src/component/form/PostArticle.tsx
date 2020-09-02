@@ -13,6 +13,16 @@ import { MenuItem } from '@material-ui/core';
 import ChipInput from "material-ui-chip-input";
 import { Category } from '../../interface/category';
 
+interface PostBestBuy {
+  _id?: string
+  uid: string
+  title: string
+  text: string
+  category: string
+  url: string
+  createdAt: Date
+}
+
 const initialCategory = [{
   _id: '',
   name: ''
@@ -40,7 +50,7 @@ const PostArticle = () => {
     setTags(prev => [...prev,chip])
   }
 
-  const postArticleWithUid = async (values: BestBuy) => {
+  const postArticleWithUid = async (values: PostBestBuy) => {
     if (!isAuthenticated) {
       return
     }
