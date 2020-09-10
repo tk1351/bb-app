@@ -9,6 +9,7 @@ import Home from './Home';
 import Profile from '../user/Profile'
 import PostArticle from '../form/PostArticle';
 import ArticleDetail from '../article/ArticleDetail';
+import EditArticle from '../form/EditArticle';
 
 const Routes = () => {
   return(
@@ -19,6 +20,7 @@ const Routes = () => {
           <Route path="/profile" component={Profile} />
           <Route path="/submit" component={PostArticle} />
           <Route path="/detail/:id" component={ArticleDetail} />
+          <Route path="/edit/:id" component={EditArticle}/>
         </Switch>
       </div>
   )

@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { Formik, Form } from 'formik';
+import history from '../../history'
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import { Formik, Form } from 'formik';
-import { postArticle } from '../../module/article';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useStyles } from '../../styles/postArticle'
 import axios from 'axios'
 import { MenuItem } from '@material-ui/core';
 import ChipInput from "material-ui-chip-input";
 import { Category } from '../../interface/category';
+import { useStyles } from '../../styles/postArticle'
+import { BestBuy } from '../../interface/bestBuy';
 
-interface PostBestBuy {
-  _id?: string
-  uid: string
-  title: string
-  text: string
-  category: string
-  url: string
-  createdAt: Date
+const initialValue = {
+  _id: '',
+  uid: '',
+  title: '',
+  text: '',
+  tags: [''],
+  category: '',
+  url: '',
+  createdAt: new Date()
 }
 
 const initialCategory = [{
@@ -27,42 +28,23 @@ const initialCategory = [{
   name: ''
 }]
 
-const initialValues = {
-  uid: '',
-  title: '',
-  text: '',
-  category: '',
-  url: '',
-  createdAt: new Date()
-}
-
-const PostArticle = () => {
-  const { user, isAuthenticated } = useAuth0()
+const EditArticle = (props: { location: { state: { bestBuy: { _id: string; }; }; }; }) => {
   const [tags,setTags] = useState<string[]>([])
   const [categories, setCategories] = useState<Category[]>(initialCategory)
+  const [bestBuy, setBestBuy] = useState<BestBuy>(initialValue)
 
   useEffect(() => {
+    getArticleDetail()
     getCategoriesName()
   },[])
 
-  const handleAddChip = (chip: string) => {
-    setTags(prev => [...prev,chip])
-  }
-
-  const handleDeleteChip = (chip: string) => {
-    setTags(prev => prev.filter(tag => tag !== chip))
-  }
-
-  const postArticleWithUid = async (values: PostBestBuy) => {
-    if (!isAuthenticated) {
-      return
-    }
-    const url = `/api/v1/users/${user.sub}`
+  const getArticleDetail = async () => {
+    const url = `/api/v1/post/${props.location.state.bestBuy._id}`
     try {
       await axios.get(url)
         .then((res) => {
-          const newValues = {...values, tags, uid: res.data[0]._id}
-          postArticle(newValues)
+          setBestBuy(res.data)
+          setTags(res.data.tags)
         })
     } catch (error) {
       console.error(error)
@@ -81,17 +63,36 @@ const PostArticle = () => {
     }
   }
 
+  const editArticleById = async (value: BestBuy) => {
+    const url = `/api/v1/post/${props.location.state.bestBuy._id}`
+    try {
+      await axios.put(url, {...value,tags})
+      history.push('/home')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleAddChip = (chip: string) => {
+    setTags(prev => [...prev,chip])
+  }
+
+  const handleDeleteChip = (chip: string) => {
+    setTags(prev => prev.filter(tag => tag !== chip))
+  }
+
   const classes = useStyles();
 
   return (
     <Container component='main' maxWidth='xs'>
       <Typography component='h1' variant='h6'>
-        BestBuyを投稿する
+        BestBuyを編集する
       </Typography>
       <Formik
-        initialValues={initialValues}
-        onSubmit={(values) => {
-          postArticleWithUid(values)
+        enableReinitialize={true}
+        initialValues={bestBuy}
+        onSubmit={(value) => {
+          editArticleById(value)
         }}
       >
         {({ values, handleChange }) => (
@@ -127,9 +128,9 @@ const PostArticle = () => {
               margin='normal'
               label='タグ'
               variant='outlined'
+              value={tags}
               onAdd={(chip) => handleAddChip(chip)}
               onDelete={(chip) => handleDeleteChip(chip)}
-              value={tags}
               fullWidth
             />
             <TextField
@@ -176,7 +177,7 @@ const PostArticle = () => {
         )}
       </Formik>
     </Container>
-  );
-};
+  )
+}
 
-export default PostArticle;
+export default EditArticle

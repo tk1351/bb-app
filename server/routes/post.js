@@ -57,4 +57,27 @@ router.delete('/:postId', (req, res) => {
   });
 });
 
+router.put('/:postId', (req, res) => {
+  const postId = req.params.postId
+  Post.findById(postId, function(err, foundPost) {
+    if(err) {
+      res.send(err)
+    } else {
+      foundPost.title = req.body.title
+      foundPost.text = req.body.text
+      foundPost.tags = req.body.tags
+      foundPost.category = req.body.category
+      foundPost.url = req.body.url
+
+      foundPost.save(function(err) {
+        if(err) {
+          res.send(err)
+        } else {
+          res.json({ update: 'success' })
+        }
+      })
+    }
+  })
+})
+
 module.exports = router;
