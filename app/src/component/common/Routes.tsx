@@ -10,6 +10,7 @@ import Profile from '../user/Profile'
 import PostArticle from '../form/PostArticle';
 import ArticleDetail from '../article/ArticleDetail';
 import EditArticle from '../form/EditArticle';
+import CategoryPage from '../article/CategoryPage';
 
 const Routes = () => {
   return(
@@ -20,7 +21,8 @@ const Routes = () => {
           <Route path="/profile" component={Profile} />
           <Route path="/submit" component={PostArticle} />
           <Route path="/detail/:id" component={ArticleDetail} />
-          <Route path="/edit/:id" component={EditArticle}/>
+          <Route path="/edit/:id" component={EditArticle} />
+          <Route path="/category/:id" component={CategoryPage} />
         </Switch>
       </div>
   )

@@ -8,6 +8,18 @@ router.get('', (req, res) => {
   })
 })
 
+router.get('/:categoryId', (req, res) => {
+  const categoryId = req.params.categoryId
+  Category.findById(categoryId, function (err, foundCategory) {
+    if (err) {
+      return res
+        .status(422)
+        .send({ errors: [{ title: 'Error', detail: 'Category not found' }] })
+    }
+    return res.json(foundCategory)
+  })
+})
+
 router.post('', (req, res) => {
   const CategoryPost = new Category()
 

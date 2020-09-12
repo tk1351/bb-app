@@ -15,23 +15,23 @@ import { Category } from '../../interface/category';
 interface PostBestBuy {
   _id?: string
   uid: string
+  categoryId: string
   title: string
   text: string
-  category: string
   url: string
   createdAt: Date
 }
 
-const initialCategory = [{
+export const initialCategory = [{
   _id: '',
   name: ''
 }]
 
 const initialValues = {
   uid: '',
+  categoryId: '',
   title: '',
   text: '',
-  category: '',
   url: '',
   createdAt: new Date()
 }
@@ -57,17 +57,27 @@ const PostArticle = () => {
     if (!isAuthenticated) {
       return
     }
+
+    // const result = categories.find((id) => id.name === values.category)
+    // console.log(result?._id)
+
     const url = `/api/v1/users/${user.sub}`
     try {
       await axios.get(url)
         .then((res) => {
-          const newValues = {...values, tags, uid: res.data[0]._id}
+          console.log('values', values)
+          const newValues = { 
+            ...values, 
+            tags, 
+            uid: res.data[0]._id 
+          }
           postArticle(newValues)
         })
     } catch (error) {
       console.error(error)
     }
   }
+  //
 
   const getCategoriesName = async () => {
     const url = '/api/v1/category'
@@ -138,15 +148,15 @@ const PostArticle = () => {
               margin='normal'
               label='カテゴリー'
               variant='outlined'
-              name='category'
+              name='categoryId'
               type='text'
-              value={values.category}
+              value={values.categoryId}
               onChange={handleChange}
               required
               fullWidth
             >
               {categories.map((category: Category) => (
-                <MenuItem key={category.name} value={category.name}>
+                <MenuItem key={category.name} value={category._id}>
                   {category.name}
                 </MenuItem>
               ))}

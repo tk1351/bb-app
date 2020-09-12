@@ -40,5 +40,8 @@ createStyles({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
+  column: {
+    display:'flex',
+  },
 })
 );

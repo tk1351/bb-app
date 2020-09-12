@@ -4,7 +4,7 @@ export interface BestBuy {
     uid: string
     title: string
     text: string
-    category: string
+    categoryId: string
     url: string
     createdAt: Date
 }

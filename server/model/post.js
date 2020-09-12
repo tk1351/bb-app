@@ -3,11 +3,11 @@ const Schema = mongoose.Schema
 
 const PostSchema = new Schema({
   uid: { type: String },
+  categoryId: { type: String },
   title: { type: String, max:[30] },
   text: { type: String },
   image: { type: String },
   tags: { type: [String] },
-  category: { type: String },
   url: { type: String },
   fav: { type: Number }
 },{

@@ -9,6 +9,7 @@ import { pushPostArticlePage } from '../../module/location';
 import { useStyles } from '../../styles/home'
 import { useAuth0 } from '@auth0/auth0-react';
 import { Typography, CssBaseline, Grid, Card, CardMedia, CardContent, CardActions } from '@material-ui/core';
+import Sidebar from './Sidebar';
 
 //FIXME: 実際の記事から3-4つ程度取得
 const cards = [1, 2, 3];
@@ -31,6 +32,9 @@ const Home = () => {
             投稿する
           </Button>
           <TimeLine />
+          <Sidebar />
+          
+          
         </Container>
       )}
       {!isAuthenticated && (

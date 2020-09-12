@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import axios from 'axios'
 import { BestBuy } from '../../interface/bestBuy';
 import CardMedia from '@material-ui/core/CardMedia';
-import { Box } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useStyles } from '../../styles/timeLine'
 import ArticleHeader from './ArticleHeader';
@@ -17,7 +17,7 @@ const initialValue = [{
   title: '',
   text: '',
   tags: [],
-  category: '',
+  categoryId: '',
   url: '',
   createdAt: new Date()
 }]
@@ -100,7 +100,6 @@ const TimeLine = () => {
           </Card>
         </Box>
       )}
-      
     </>
   )
 }

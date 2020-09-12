@@ -32,10 +32,10 @@ router.post('', (req, res) => {
   const ArticlePost = new Post();
 
   ArticlePost.uid = req.body.uid;
+  ArticlePost.categoryId = req.body.categoryId
   ArticlePost.title = req.body.title;
   ArticlePost.text = req.body.text;
   ArticlePost.tags = req.body.tags;
-  ArticlePost.category = req.body.category;
   ArticlePost.url = req.body.url;
   ArticlePost.created = req.body.created;
 

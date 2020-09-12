@@ -18,7 +18,7 @@ const initialValue = {
   title: '',
   text: '',
   tags: [''],
-  category: '',
+  categoryId: '',
   url: '',
   createdAt: new Date()
 }
@@ -141,7 +141,7 @@ const EditArticle = (props: { location: { state: { bestBuy: { _id: string; }; };
               variant='outlined'
               name='category'
               type='text'
-              value={values.category}
+              value={values.categoryId}
               onChange={handleChange}
               required
               fullWidth

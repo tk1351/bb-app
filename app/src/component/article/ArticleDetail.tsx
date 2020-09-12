@@ -22,6 +22,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useStyles } from '../../styles/timeLine'
 import { goBackTimeLine } from '../../module/location';
+import { initialCategory } from '../form/PostArticle';
+import { Category } from '../../interface/category';
 
 const initialValue = {
   _id: '',
@@ -29,16 +31,18 @@ const initialValue = {
   title: '',
   text: '',
   tags: [''],
-  category: '',
+  categoryId: '',
   url: '',
   createdAt: new Date()
 } 
 
 const ArticleDetail = (props: { location: { state: { bestBuy: { _id: string; }; }; }; }) => {
   const [bestBuyDetail, setBestBuyDetail] = useState<BestBuy>(initialValue)
+  const [categories, setCategories] = useState<Category[]>(initialCategory)
 
   useEffect(() => {
     getBestBuyById()
+    getCategoriesName()
   },[])
 
   const getBestBuyById = async() => {
@@ -66,6 +70,24 @@ const ArticleDetail = (props: { location: { state: { bestBuy: { _id: string; }; 
       console.error(error)
     }
   }
+
+  const getCategoriesName = async () => {
+    const url = '/api/v1/category'
+    try {
+      await axios.get(url)
+        .then((res) => {
+          setCategories(res.data)
+        })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const findCategoryName = () => {
+    return categories.find((category) => 
+      category._id === bestBuyDetail.categoryId)?.name
+  }
+  
 
   const classes = useStyles();
 
@@ -97,7 +119,7 @@ const ArticleDetail = (props: { location: { state: { bestBuy: { _id: string; }; 
                 {bestBuyDetail.text}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                カテゴリー：{bestBuyDetail.category}
+                カテゴリー：{findCategoryName()}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 {bestBuyDetail.tags.map(tag =>
