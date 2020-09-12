@@ -58,9 +58,6 @@ const PostArticle = () => {
       return
     }
 
-    // const result = categories.find((id) => id.name === values.category)
-    // console.log(result?._id)
-
     const url = `/api/v1/users/${user.sub}`
     try {
       await axios.get(url)
@@ -77,7 +74,6 @@ const PostArticle = () => {
       console.error(error)
     }
   }
-  //
 
   const getCategoriesName = async () => {
     const url = '/api/v1/category'
