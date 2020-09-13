@@ -11,7 +11,7 @@ import { useStyles } from '../../styles/timeLine'
 import ArticleHeader from './ArticleHeader';
 import ArticleFooter from './ArticleFooter';
 
-const initialValue = [{
+export const initialValue = [{
   _id: '',
   uid: '',
   title: '',

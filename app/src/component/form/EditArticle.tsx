@@ -147,7 +147,7 @@ const EditArticle = (props: { location: { state: { bestBuy: { _id: string; }; };
               fullWidth
             >
               {categories.map((category: Category) => (
-                <MenuItem key={category.name} value={category.name}>
+                <MenuItem key={category.name} value={category._id}>
                   {category.name}
                 </MenuItem>
               ))}

@@ -62,7 +62,6 @@ const PostArticle = () => {
     try {
       await axios.get(url)
         .then((res) => {
-          console.log('values', values)
           const newValues = { 
             ...values, 
             tags, 

@@ -10,7 +10,6 @@ router.get('', (req, res) => {
 
 router.get('/user/:uid', (req, res) => {
   const uid = req.params.uid;
-  console.log(uid);
   Post.find({ uid: uid }, function (err, foundPost) {
     return res.json(foundPost);
   });
@@ -28,6 +27,18 @@ router.get('/:postId', (req, res) => {
   });
 });
 
+router.get('/category/:categoryId', (req, res) => {
+  const categoryId = req.params.categoryId
+  Post.find({ categoryId }, function (err, foundPost) {
+    if (err) {
+      return res
+        .status(422)
+        .send({ errors: [{ title: 'Error', detail: 'No post matches this category' }] });
+    }
+    return res.json(foundPost)
+  })
+})
+
 router.post('', (req, res) => {
   const ArticlePost = new Post();
 
@@ -38,8 +49,6 @@ router.post('', (req, res) => {
   ArticlePost.tags = req.body.tags;
   ArticlePost.url = req.body.url;
   ArticlePost.created = req.body.created;
-
-  console.log(req.body)
 
   ArticlePost.save(function (err) {
     if (err) {
@@ -66,7 +75,7 @@ router.put('/:postId', (req, res) => {
       foundPost.title = req.body.title
       foundPost.text = req.body.text
       foundPost.tags = req.body.tags
-      foundPost.category = req.body.category
+      foundPost.categoryId = req.body.categoryId
       foundPost.url = req.body.url
 
       foundPost.save(function(err) {
